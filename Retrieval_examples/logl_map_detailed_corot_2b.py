@@ -60,7 +60,7 @@ bad_indexs = None
 
 ## --- Additionnal global variables
 inj_alpha = 'ones'
-idx_orders = np.arange(54)
+idx_orders = np.delete(range(54), 29) # np.arange(49)
 nolog = True
 
 # Choose over which axis the logl is summed.
@@ -172,24 +172,14 @@ def log_like_detailed(theta):
 log_like_detailed(np.array([ 10, 150]))
 
 # %%
-# # Test with smaller grid
-# kp, vsys = np.meshgrid(np.linspace(184., 186., 2),
-#                      np.linspace(-20., 20., 20))
-
-# logl_map = list(map(log_like_detailed, np.array([np.ravel(vsys), np.ravel(kp)]).T))
-
-# data_shape = data_trs['0']['flux'].shape
-# logl_map = np.reshape(logl_map, (*kp.shape, *logl_map[0].shape))
-
-# %%
 # Compute the log likelihood for a grid of values of Kp and v_sys.
 # Time to find the ideal number of process
 from time import time
 
-# kp, vsys = np.meshgrid(np.linspace(0., 400., 400),
-#                      np.linspace(-100., 100., 400))
-kp, vsys = np.meshgrid(np.linspace(173., 175., 4),
-                     np.linspace(-20., 20., 20))
+kp, vsys = np.meshgrid(np.linspace(0., 400., 400),
+                     np.linspace(-100., 100., 400))
+# kp, vsys = np.meshgrid(np.linspace(173., 175., 4),
+#                      np.linspace(-20., 20., 20))
 
 start = time()
 print("Preparing the map with pool...")
@@ -208,11 +198,11 @@ np.savez(out_path / 'logl_map_detailed_CoRoT_2b.npz', logl_map=logl_map, kp=kp, 
 
 
 # %%
-lmap = np.load(Path('/home/ldang05/scratch/dynasty_maps/logl_map_detailed_CoRoT_2b.npz'))
-logl_map=lmap['logl_map']
-kp=lmap['kp']
-vsys=lmap['vsys']
-plt.plot(np.sum(logl_map, axis=(-1, -2)))
-# plt.imshow(np.sum(logl_map, axis=(-1, -2)))
+# lmap = np.load(Path('/home/ldang05/scratch/dynasty_maps/logl_map_detailed_CoRoT_2b.npz'))
+# logl_map=lmap['logl_map']
+# kp=lmap['kp']
+# vsys=lmap['vsys']
+# plt.plot(np.sum(logl_map, axis=(-1, -2)))
+# # plt.imshow(np.sum(logl_map, axis=(-1, -2)))
 
 # %%
