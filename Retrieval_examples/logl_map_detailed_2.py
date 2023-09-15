@@ -1,8 +1,9 @@
+# %%
 import os
 from multiprocessing import Pool
 from pathlib import Path
 from sys import path
-path.append('/home/adb/VSCodeProjects/')
+path.append('/home/ldang05/Starships_prj/') # path to Starships
 
 import matplotlib.pyplot as plt
 import numpy as np
