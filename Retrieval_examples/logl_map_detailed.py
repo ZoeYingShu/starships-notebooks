@@ -37,12 +37,6 @@ obs = Observations(name=pl_name)
 
 planet = obs.planet
 
-# pl_name = 'WASP-77 A b'
-
-
-
-
-
 # pl_name = 'CoRoT-2 b'
 # planet.ap = 0.0281*u.au # semi-major axis
 # planet.incl = (88.08*u.deg).to(u.rad)

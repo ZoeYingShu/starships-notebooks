@@ -29,13 +29,12 @@ if not np.isfinite(model_high[100:-100]).all():
 
 # %%
 
-# wasp-77 ab
-pl_name = 'WASP-77 A b'
+pl_name = 'CoRoT-2 b'
 planet = pl_obs.Planet(name=pl_name)
-planet.ap = 0.02335*u.au
-planet.R_star = 0.91*u.R_sun
-planet.R_pl = 1.23*u.R_jup
-planet.M_star = 0.903*const.M_sun
+planet.ap = 0.0281*u.au # semi-major axis
+planet.R_star = 0.902*u.R_sun # star radius
+planet.R_pl = 1.466*u.R_jup # planet radius
+planet.M_star = 0.97*const.M_sun
 Kp_scale = (planet.M_pl / planet.M_star).decompose().value
 
 
@@ -47,8 +46,8 @@ Kp_scale = (planet.M_pl / planet.M_star).decompose().value
 # high_res_path = Path.home() / 'projects/def-dlafre/shared/for_adb/'
 # high_res_file_stem = 'wasp77_HK_4-pc_mask_wings90'
 
-high_res_path = Path('/home/ldang05/projects/def-dlafre/ldang05/Data/WASP-77Ab/CustomMasking')
-high_res_file_stem = 'wasp77_HK_4-pc_mask_wings90'
+high_res_path = Path('/home/ldang05/projects/def-dlafre/ldang05/Data/CoRoT-2b/CustomMasking')
+high_res_file_stem = 'corot2b_HK_4-pc_mask_wings90'
 
 kind_trans = 'emission'
 
@@ -61,7 +60,7 @@ bad_indexs = None
 
 ## --- Additionnal global variables
 inj_alpha = 'ones'
-idx_orders = np.delete(range(54), 29) # np.arange(49)
+idx_orders = np.arange(54)
 nolog = True
 
 # Choose over which axis the logl is summed.
@@ -187,10 +186,10 @@ log_like_detailed(np.array([ 10, 150]))
 # Time to find the ideal number of process
 from time import time
 
-kp, vsys = np.meshgrid(np.linspace(0., 400., 400),
-                     np.linspace(-100., 100., 400))
-# kp, vsys = np.meshgrid(np.linspace(184., 186., 2),
-#                      np.linspace(-20., 20., 20))
+# kp, vsys = np.meshgrid(np.linspace(0., 400., 400),
+#                      np.linspace(-100., 100., 400))
+kp, vsys = np.meshgrid(np.linspace(173., 175., 4),
+                     np.linspace(-20., 20., 20))
 
 start = time()
 print("Preparing the map with pool...")
@@ -205,15 +204,15 @@ out_path = Path('/home/ldang05/scratch/dynasty_maps')
 # Create the output directory if it doesn't exist.
 if not out_path.exists():
     out_path.mkdir()
-np.savez(out_path / 'logl_map_detailed.npz', logl_map=logl_map, kp=kp, vsys=vsys)
+np.savez(out_path / 'logl_map_detailed_CoRoT_2b.npz', logl_map=logl_map, kp=kp, vsys=vsys)
 
 
 # %%
-# lmap = np.load(Path('/home/ldang05/scratch/dynasty_maps/logl_map_detailed.npz'))
-# logl_map=lmap['logl_map']
-# kp=lmap['kp']
-# vsys=lmap['vsys']
-# plt.plot(np.sum(logl_map, axis=(-1, -2)))
-# # plt.imshow(np.sum(logl_map, axis=(-1, -2)))
+lmap = np.load(Path('/home/ldang05/scratch/dynasty_maps/logl_map_detailed_CoRoT_2b.npz'))
+logl_map=lmap['logl_map']
+kp=lmap['kp']
+vsys=lmap['vsys']
+plt.plot(np.sum(logl_map, axis=(-1, -2)))
+# plt.imshow(np.sum(logl_map, axis=(-1, -2)))
 
 # %%
