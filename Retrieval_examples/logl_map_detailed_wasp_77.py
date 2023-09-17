@@ -194,7 +194,7 @@ kp, vsys = np.meshgrid(np.linspace(0., 400., 400),
 
 start = time()
 print("Preparing the map with pool...")
-n_process = 32 * 4
+n_process = 32 * 5
 with Pool(n_process) as pool:
     logl_map = pool.map(log_like_detailed, np.array([np.ravel(vsys), np.ravel(kp)]).T)
 print(f"Time elapsed with {n_process} processes: {time() - start:.2f} s")
@@ -205,7 +205,7 @@ out_path = Path('/home/ldang05/scratch/dynasty_maps')
 # Create the output directory if it doesn't exist.
 if not out_path.exists():
     out_path.mkdir()
-np.savez(out_path / 'logl_map_detailed.npz', logl_map=logl_map, kp=kp, vsys=vsys)
+np.savez(out_path / 'logl_map_detailed_wasp_77.npz', logl_map=logl_map, kp=kp, vsys=vsys)
 
 
 # %%

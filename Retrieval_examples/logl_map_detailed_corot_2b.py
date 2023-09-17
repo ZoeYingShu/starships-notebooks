@@ -198,11 +198,11 @@ np.savez(out_path / 'logl_map_detailed_CoRoT_2b.npz', logl_map=logl_map, kp=kp, 
 
 
 # %%
-# lmap = np.load(Path('/home/ldang05/scratch/dynasty_maps/logl_map_detailed_CoRoT_2b.npz'))
-# logl_map=lmap['logl_map']
-# kp=lmap['kp']
-# vsys=lmap['vsys']
+lmap = np.load(Path('/home/ldang05/scratch/dynasty_maps/logl_map_detailed_CoRoT_2b.npz'))
+logl_map=lmap['logl_map']
+kp=lmap['kp']
+vsys=lmap['vsys']
 # plt.plot(np.sum(logl_map, axis=(-1, -2)))
-# # plt.imshow(np.sum(logl_map, axis=(-1, -2)))
+plt.imshow(np.sum(logl_map, axis=(-1, -2)))
 
 # %%
