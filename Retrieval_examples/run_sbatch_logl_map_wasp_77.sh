@@ -1,8 +1,8 @@
 #!/bin/bash
 #SBATCH --account=def-dlafre
-#SBATCH --nodes=5
-#SBATCH --cpus-per-task=32
-#SBATCH --mem=80G
+#SBATCH --nodes=1
+#SBATCH --cpus-per-task=64
+#SBATCH --mem=140G
 #SBATCH --time=3-12:00
 #SBATCH --job-name logl_map_wasp
 #SBATCH --output=/home/ldang05/scratch/sbatch_outputs/out_sbatch_%j.txt
